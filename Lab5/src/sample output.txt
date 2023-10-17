@@ -1,0 +1,335 @@
+
+### Installing module #1
+
+[    3.473273] kshram: loading out-of-tree module taints kernel.
+[    3.478564] kshram0: 4096 bytes allocated @ ffff94f9c1d78000
+[    3.478786] kshram1: 4096 bytes allocated @ ffff94f9c1d79000
+[    3.478861] kshram2: 4096 bytes allocated @ ffff94f9c1d7a000
+[    3.478927] kshram3: 4096 bytes allocated @ ffff94f9c1d7b000
+[    3.478993] kshram4: 4096 bytes allocated @ ffff94f9c1d7c000
+[    3.479059] kshram5: 4096 bytes allocated @ ffff94f9c1d7d000
+[    3.479207] kshram6: 4096 bytes allocated @ ffff94f9c1d7e000
+[    3.479298] kshram7: 4096 bytes allocated @ ffff94f9c1d7f000
+[    3.482902] kshram: initialized.
+kshram 16384 0 - Live 0xffffffffc0040000 (O)
+
+### Check /dev files
+
+crw-rw-rw-    1 root     0         250,   0 Mar 25 11:59 /dev/kshram0
+crw-rw-rw-    1 root     0         250,   1 Mar 25 11:59 /dev/kshram1
+crw-rw-rw-    1 root     0         250,   2 Mar 25 11:59 /dev/kshram2
+crw-rw-rw-    1 root     0         250,   3 Mar 25 11:59 /dev/kshram3
+crw-rw-rw-    1 root     0         250,   4 Mar 25 11:59 /dev/kshram4
+crw-rw-rw-    1 root     0         250,   5 Mar 25 11:59 /dev/kshram5
+crw-rw-rw-    1 root     0         250,   6 Mar 25 11:59 /dev/kshram6
+crw-rw-rw-    1 root     0         250,   7 Mar 25 11:59 /dev/kshram7
+
+### Single message test
+
+[    3.797401] random: crng init done
+[    3.798824] kshram/mmap: idx 0 size 4096
+kshram msg check
+mem = 0x7ff5acc52000, size = 1000
+
+[    3.811035] kshram/mmap: idx 0 size 4096
+kshram msg check
+mem = 0x7ff787d32000, size = 1000
+Curr Message: M:WBL3;J12^i[Eg[1?S>KcZI2amm@cDeZl76oBP0D>i0Sa[U0>cL2Ne4?b1OUFE?
+Next Message: M:E=78AD2\2T[I<Q4WD=:dLZEIh>eXM6NbDUjUjmAlQmE]NIEcVOW39mL1;BZXH8
+[    3.816726] kshram/mmap: idx 0 size 4096
+kshram msg check
+mem = 0x7fcc39dc7000, size = 1000
+Curr Message: M:E=78AD2\2T[I<Q4WD=:dLZEIh>eXM6NbDUjUjmAlQmE]NIEcVOW39mL1;BZXH8
+Next Message: M:1nG<DSAbLU6B8o[fPX97TTK[`E0DF];G[RSo6daRJgdRgOHG7QN[5jGf?G:V4F
+[    3.821860] kshram/mmap: idx 0 size 4096
+kshram msg check
+mem = 0x7f16a94af000, size = 1000
+Curr Message: M:1nG<DSAbLU6B8o[fPX97TTK[`E0DF];G[RSo6daRJgdRgOHG7QN[5jGf?G:V4F
+Next Message: M:R1]dEj4c[9DFaQTdhRkT>A8AbbXJkF\MHIB]CFPoOdEAEj5>L1bZBjk4\TNWj:
+[    3.827302] kshram/mmap: idx 0 size 4096
+kshram msg check
+mem = 0x7f38f9295000, size = 1000
+Curr Message: M:R1]dEj4c[9DFaQTdhRkT>A8AbbXJkF\MHIB]CFPoOdEAEj5>L1bZBjk4\TNWj:
+Next Message: M::Z\R4o`4]JEgNbGRg=baRVjeDME1C_cMJOoNN_S<9h3XZK:QXlC;R=0gZEhm5[
+
+### Resizing test
+
+kshram: 8 slots detected
+/dev/kshram0: size 1052672 correct.
+[    3.844506] kshram/mmap: idx 0 size 1052672
+/dev/kshram1: size 1056768 correct.
+[    3.845639] kshram/mmap: idx 1 size 1056768
+/dev/kshram2: size 1060864 correct.
+[    3.846857] kshram/mmap: idx 2 size 1060864
+/dev/kshram3: size 1064960 correct.
+[    3.850750] kshram/mmap: idx 3 size 1064960
+/dev/kshram4: size 1069056 correct.
+[    3.851909] kshram/mmap: idx 4 size 1069056
+/dev/kshram5: size 1073152 correct.
+[    3.852993] kshram/mmap: idx 5 size 1073152
+/dev/kshram6: size 1077248 correct.
+[    3.854021] kshram/mmap: idx 6 size 1077248
+/dev/kshram7: size 1081344 correct.
+[    3.855041] kshram/mmap: idx 7 size 1081344
+00: 1052672
+01: 1056768
+02: 1060864
+03: 1064960
+04: 1069056
+05: 1073152
+06: 1077248
+07: 1081344
+
+### Memory sharing test #1
+
+client1: starts ... (62)
+client0: starts [    3.879303] kshram/mmap: idx 0 size 1052672
+... (61)
+client0: mem = 0x7fb7bbc7b000
+[    3.880360] kshram/mmap: idx 0 size 1052672
+client1: mem = 0x7f50ad698000
+Round 00: 6YcAo:\Y=j[bkS6l2DhKXW=fJ^ScO9J PASSED
+Round 01: b=gaHSJUM5GHYND[b=6KdDA>2d1QmL7 PASSED
+Round 02: YnQ1QlWn1nGZL[F?hLZ\`kkb_lD\HKL PASSED
+Round 03: Jn3kjZjkYAV5llDeHnQ9iLkXI?Ea[ac PASSED
+Round 04: _g0YQjU:;;@87TmOSNXLkT5DcJ5N;iS PASSED
+Round 05: `TTAN9LZD\bK@_kc=S@87ELk_RIjKme PASSED
+Round 06: QJLoShYhTKCe:>XHbhPi=mdlO>gj;\5 PASSED
+Round 07: 6Q[ZJERn`eck4LCfDc_R`TN?bE9m2>Y PASSED
+Round 08: `Db:YD8J:lE>HX4\Kc><G]K92U64c_= PASSED
+Round 09: `Db:YD8J:lE>HX4\Kc><G]K92U64c_= PASSED
+Round 10: 5a\IWcgI@SSDCIdgNPb@Xf5D1ndl4hj PASSED
+Round 11: YVS@JJYZn<nAUc84CjDkaI@bG4^KlYU PASSED
+Round 12: ?8eYRNCPZBb@5jDHeXDV2THIX7eU`J: PASSED
+Round 13: R0Y4NlU9>GICA]\6E0\GT5a<<Val0lk PASSED
+Round 14: lTVJQ;S_Rl3dY_jo_WFC\7Oh]Ad]=_? PASSED
+Round 15: DfSe17TT3WH]FB\5i2HU:hMg9AUF1dO PASSED
+Round 16: Z2:\9^@=FXj\jVbdX:Ib2gZ;8?Q930N PASSED
+Round 17: 3XJ<GZI]BCI<i;0RFJDHAnTI=5SA61o PASSED
+Round 18: ZIE13_^E27QlCRNYlb1=aUVn[9?a;>j PASSED
+Round 19: W?fZnTo1[Qmn3KWo=Y<n>bmil<Z7KTl PASSED
+Round 20: db]bF\c1=`0@;W?I@KGO>DH:Q3AlW=n PASSED
+Round 21: o[>EH1FUbFfmn5F>Q^]_26iS9:O`GN< PASSED
+Round 22: 9J[QK17=Hm;F2QTS?BBBH;eQEEA\cM2 PASSED
+Round 23: g]NC_UP7R[MT=18LCJ^[VT<kiNX\kZX PASSED
+Round 24: H667[V>=B[bO\jk0DZ[j>hf7FNcA8K4 PASSED
+Round 25: R:W=aeK3P=R=7M=K7hFE`<L6Z?Hb[LC PASSED
+Round 26: WjJH`eK@2mM9JZURSkgC7DJaSbS>>fK PASSED
+Round 27: af=Q[Xa^U?g0iLRLGI`N]:?AlcO:Yk0 PASSED
+Round 28: a=kLf]:Kl2KeNmBfG2D4<TE8GeB0`BK PASSED
+Round 29: PFmF38ao:=eX:7NQ9cVEGkM^`_^P291 PASSED
+Round 30: PohS7YSAfHi1OHRX;8mR4J@d9nE;8F] PASSED
+Round 31: EU;L?^]56W6UoY=:a:\eTlZ^joi2EWZ PASSED
+Round 32: <f7KTeQ[LW@K@NU2XAg==Qk7Pd:fKdQ PASSED
+Round 33: ZX3?MTji<:DLXiNA:FNGgIOH=Y>YM_A PASSED
+Round 34: GDGeiA^5K3Q4l0E7FcN=<mUIVc24RC< PASSED
+Round 35: XS_QdMV?P7CM7XTMK2[W0@1V43ZVGfP PASSED
+Round 36: I?P=]6M==`ZEI>bdAMLA^MgbPRHgHif PASSED
+Round 37: 8FoeLL3Z=]oVlaJ=?fNmCE_dg7[@0R2 PASSED
+Round 38: h1nEN1o[_nA[_[hnRFke[ZYSbEcbgek PASSED
+Round 39: fj4Dk3oZ1@Eal=_NS[C?Emb7BUj9Jeh PASSED
+Round 40: _mU[0TE2e[cahR?L=R[SOMZa2TjLJc\ PASSED
+Round 41: `Ad`f:b[eUL]8[9E=dh]ASNC7I_Q<L[ PASSED
+Round 42: ]O\SYO>N4Z<<EERS:J@Km^_57NVCjA? PASSED
+Round 43: al;JKJiO45\JJ>mTX=0Vk_[3=AF8SV` PASSED
+Round 44: Rk^mEWLJ\8d7Fa[on[UiJ@lXQC`4iPH PASSED
+Round 45: K7Ha^d;KmoRC`=B^igWC7TkYg[]`;6; PASSED
+Round 46: =SHkGSFDRhXB6j0obWBi;>R2i@b5Fm\ PASSED
+Round 47: P4NhWe<9]dKc_KbQ25J>Cm@<=3AS0m6 PASSED
+Round 48: 1TIXIUa7J<j9W]ZZb4h518A>Sa<Pg] PASSED
+Round 49: L6:e[ll58g>`ThJFmBKnJ\=V?nb`fOB PASSED
+Round 50: UL7@H4FQkTAOM[eJm@HGlUm<T_lJ>>\ PASSED
+Round 51: Zc43gJTbneAKP6eMF>dCcbOGQKa`YMS PASSED
+Round 52: AWF81jk0_<K?CA\YOQlBCKZdfKTOi8c PASSED
+Round 53: _9Ba4=acJ<3]M_Fl@C?S^iHUDl4=4gG PASSED
+Round 54: 1ZU5gFhARkn0[ElkX;OF4gkIc0Vhgn\ PASSED
+Round 55: XAmOWfa9a_9L46H\Ag3F^n_QnEIfC5^ PASSED
+Round 56: F\KmR<7Ck@`0F8\Xo_n]^]>\2XRF]AA PASSED
+Round 57: m\1Oh8bdIRd_ZPGY@EFn2UZ5==KjN\n PASSED
+Round 58: I0jA8\5Q?iAiJXSZniX0NB5[OPVm=TH PASSED
+Round 59: TBg]om>>fO7@8Zj6TR62e<^D\DBihZO PASSED
+Round 60: mG:lDH::hAK0lE6Ph<R]H@15TCnMnNj PASSED
+Round 61: e4g9L1CDB^D>4J^lWAYoQZ46n3SlQMg PASSED
+Round 62: Q^Om_bB1QV@U1nQX?:Wad\gb_J^@gUV PASSED
+Round 63: C5E2gW4H>Dm?BNgRXNCM::?iTn9KS_c PASSED
+Round 64: d8i\`m4nA2=TP469RIV]SeV7c`RGOE> PASSED
+Round 65: M70=54;F6HjWL0`oIF\l;B3o2UFRjTf PASSED
+Round 66: [fU`ja7191XV2HUK^AHiSKhV1>8kbnC PASSED
+Round 67: di>^ZE_cGGII_ndM?<GcX?IYNQT@Oh^ PASSED
+Round 68: am1KBa>Y8X2hVgEf3\Y[l2DJSiZ2aIE PASSED
+Round 69: FFmX7;B@cD8J;M@?:ij6k?PN8:PiSeK PASSED
+Round 70: ;HRCSdSG8[aD81SBjMHe\hCd3c]VX8P PASSED
+Round 71: P264fYKnD<BM=e_7C8lo0?d32QZZZ:M PASSED
+Round 72: <T>2=Y0ReCo28^9Kf5KgD?jF`T0J^NU PASSED
+Round 73: 2cl?MmaB@`EHONdET?<hN7?>[?YJ]>D PASSED
+Round 74: 1AoN>`aNQ6f0TZE8iR1GY@VDO?^=M3l PASSED
+Round 75: DkmR\^0=df=HQRQJ4Rb]bH2AW`N4cKR PASSED
+Round 76: FOY2=Y?1PLJ1okK3M=a?UcP<So@GJcN PASSED
+Round 77: B8cPa2QAOkBNf^QCkBRQ53]Y2n0LaN< PASSED
+Round 78: VoSH25YQ0logZP:Uc]6h`dQbbQ>S0JV PASSED
+Round 79: J:nL?Xm?Tl6>LAc?nj8^^YPP;^3;8Ya PASSED
+Round 80: c`n2HkBlgH:DYmSWg[EUEe5PS8[\bL> PASSED
+Round 81: <=XT8jP0BZDlXgSOSi5h^:HBC3n5O<Z PASSED
+Round 82: IB@R<aROKfK3]nS@gX8VbPh5Sf:32e_ PASSED
+Round 83: 7onD`Pc<F>?3<bD4JLZ=mRBPHMSJBBf PASSED
+Round 84: 7ond`pc<F>?3<bD4JLZ=mRBPHMSJBBf PASSED
+Round 85: X06mQEW?cE:3G9^fbVAma=PH]NBOBUS PASSED
+Round 86: UYg6nOFadPe<ZS2L:CJkQjC>HU]Z:@U PASSED
+Round 87: iLfhk<Y`]NlG2nc<A=7b8J0P0];:m`j PASSED
+Round 88: <a_8mHhZgd1ibe532<f:Vf[VTfaQV[H PASSED
+Round 89: L7jJPb4GV6@HkELmQB878c^\YO>?:V1 PASSED
+Round 90: ^l1>^5UE;e]6:94[K<bToP@XoNg:5ha PASSED
+Round 91: db1SgVh3KU9U_=@:I2^HSo0RMg\R`ME PASSED
+Round 92: ?F77lo:GUClDQ<Nj?=Cb<CDY;1<kNQO PASSED
+Round 93: hWedVo<B8OcEn^T;1FGDZ0O[<J:^jh PASSED
+Round 94: Q]J7\VCn_bb4`PXkQnBeXCEDO_N=YFc PASSED
+Round 95: 3>B_dU]SGOW8o?3P=FFfY[:8JXF4n9> PASSED
+Round 96: GP`<5M_MmGUlVXMdncZWNd`hL6lJ?;K PASSED
+Round 97: [;caXR>UicRPKoDJbn1@ba8>g5X7@3^ PASSED
+Round 98: >Q\f3jLm]nM9maS__ToQF7_=<GDLJ2H PASSED
+Round 99: S4NWojT\h1eebHTQmS2C[aPg8eDRg\: PASSED
+done.
+
+### Module remove test #1
+
+[    3.928358] kshram: cleaned up.
+
+### Installing module #2
+
+[    3.947829] kshram0: 4096 bytes allocated @ ffff94f9c1c97000
+[    3.948046] kshram1: 4096 bytes allocated @ ffff94f9c1d7f000
+[    3.948120] kshram2: 4096 bytes allocated @ ffff94f9c1d7e000
+[    3.948413] kshram3: 4096 bytes allocated @ ffff94f9c1d7d000
+[    3.948515] kshram4: 4096 bytes allocated @ ffff94f9c1d7c000
+[    3.948651] kshram5: 4096 bytes allocated @ ffff94f9c1d7b000
+[    3.948719] kshram6: 4096 bytes allocated @ ffff94f9c1d7a000
+[    3.948784] kshram7: 4096 bytes allocated @ ffff94f9c1d79000
+[    3.950987] kshram: initialized.
+kshram 16384 0 - Live 0xffffffffc0040000 (O)
+
+### Checking memory sizes
+
+00: 4096
+01: 4096
+02: 4096
+03: 4096
+04: 4096
+05: 4096
+06: 4096
+07: 4096
+
+### Memory sharing test #2
+
+client0: starts ... (69)
+[    3.970597] kshram/mmap: idx 0 size 4096
+client1: starts ... (70)
+client0: mem = 0x7f5b0d738000
+[    3.970970] kshram/mmap: idx 0 size 4096
+client1: mem = 0x7f1130e97000
+Round 00: 6YcAo:\Y=j[bkS6l2DhKXW=fJ^ScO9J PASSED
+Round 01: b=gaHSJUM5GHYND[b=6KdDA>2d1QmL7 PASSED
+Round 02: YnQ1QlWn1nGZL[F?hLZ\`kkb_lD\HKL PASSED
+Round 03: Jn3kjZjkYAV5llDeHnQ9iLkXI?Ea[ac PASSED
+Round 04: _g0YQjU:;;@87TmOSNXLkT5DcJ5N;iS PASSED
+Round 05: `TTAN9LZD\bK@_kc=S@87ELk_RIjKme PASSED
+Round 06: QJLoShYhTKCe:>XHbhPi=mdlO>gj;\5 PASSED
+Round 07: 6Q[ZJERn`eck4LCfDc_R`TN?bE9m2>Y PASSED
+Round 08: `Db:YD8J:lE>HX4\Kc><G]K92U64c_= PASSED
+Round 09: 4o]]Df7NbL\:4`fPS5\kb74d\;iPj63 PASSED
+Round 10: 5a\IWcgI@SSDCIdgNPb@Xf5D1ndl4hj PASSED
+Round 11: YVS@JJYZn<nAUc84CjDkaI@bG4^KlYU PASSED
+Round 12: ?8eYRNCPZBb@5jDHeXDV2THIX7eU`J: PASSED
+Round 13: R0Y4NlU9>GICA]\6E0\GT5a<<Val0lk PASSED
+Round 14: lTVJQ;S_Rl3dY_jo_WFC\7Oh]Ad]=_? PASSED
+Round 15: DfSe17TT3WH]FB\5i2HU:hMg9AUF1dO PASSED
+Round 16: Z2:\9^@=FXj\jVbdX:Ib2gZ;8?Q930N PASSED
+Round 17: 3XJ<GZI]BCI<i;0RFJDHAnTI=5SA61o PASSED
+Round 18: ZIE13_^E27QlCRNYlb1=aUVn[9?a;>j PASSED
+Round 19: W?fZnTo1[Qmn3KWo=Y<n>bmil<Z7KTl PASSED
+Round 20: db]bF\c1=`0@;W?I@KGO>DH:Q3AlW=n PASSED
+Round 21: o[>EH1FUbFfmn5F>Q^]_26iS9:O`GN< PASSED
+Round 22: 9J[QK17=Hm;F2QTS?BBBH;eQEEA\cM2 PASSED
+Round 23: g]NC_UP7R[MT=18LCJ^[VT<kiNX\kZX PASSED
+Round 24: H667[V>=B[bO\jk0DZ[j>hf7FNcA8K4 PASSED
+Round 25: R:W=aeK3P=R=7M=K7hFE`<L6Z?Hb[LC PASSED
+Round 26: WjJH`eK@2mM9JZURSkgC7DJaSbS>>fK PASSED
+Round 27: af=Q[Xa^U?g0iLRLGI`N]:?AlcO:Yk0 PASSED
+Round 28: a=kLf]:Kl2KeNmBfG2D4<TE8GeB0`BK PASSED
+Round 29: PFmF38ao:=eX:7NQ9cVEGkM^`_^P291 PASSED
+Round 30: PohS7YSAfHi1OHRX;8mR4J@d9nE;8F] PASSED
+Round 31: EU;L?^]56W6UoY=:a:\eTlZ^joi2EWZ PASSED
+Round 32: <f7KTeQ[LW@K@NU2XAg==Qk7Pd:fKdQ PASSED
+Round 33: ZX3?MTji<:DLXiNA:FNGgIOH=Y>YM_A PASSED
+Round 34: GDGeiA^5K3Q4l0E7FcN=<mUIVc24RC< PASSED
+Round 35: XS_QdMV?P7CM7XTMK2[W0@1V43ZVGfP PASSED
+Round 36: I?P=]6M==`ZEI>bdAMLA^MgbPRHgHif PASSED
+Round 37: 8FoeLL3Z=]oVlaJ=?fNmCE_dg7[@0R2 PASSED
+Round 38: h1nEN1o[_nA[_[hnRFke[ZYSbEcbgek PASSED
+Round 39: fj4Dk3oZ1@Eal=_NS[C?Emb7BUj9Jeh PASSED
+Round 40: _mU[0TE2e[cahR?L=R[SOMZa2TjLJc\ PASSED
+Round 41: `Ad`f:b[eUL]8[9E=dh]ASNC7I_Q<L[ PASSED
+Round 42: ]O\SYO>N4Z<<EERS:J@Km^_57NVCjA? PASSED
+Round 43: al;JKJiO45\JJ>mTX=0Vk_[3=AF8SV` PASSED
+Round 44: Rk^mEWLJ\8d7Fa[on[UiJ@lXQC`4iPH PASSED
+Round 45: K7Ha^d;KmoRC`=B^igWC7TkYg[]`;6; PASSED
+Round 46: =SHkGSFDRhXB6j0obWBi;>R2i@b5Fm\ PASSED
+Round 47: P4NhWe<9]dKc_KbQ25J>Cm@<=3AS0m6 PASSED
+Round 48: 1TIXIUa7J<j9W]ZZb4h518A>Sa<Pg] PASSED
+Round 49: L6:e[ll58g>`ThJFmBKnJ\=V?nb`fOB PASSED
+Round 50: UL7@H4FQkTAOM[eJm@HGlUm<T_lJ>>\ PASSED
+Round 51: Zc43gJTbneAKP6eMF>dCcbOGQKa`YMS PASSED
+Round 52: AWF81jk0_<K?CA\YOQlBCKZdfKTOi8c PASSED
+Round 53: _9Ba4=acJ<3]M_Fl@C?S^iHUDl4=4gG PASSED
+Round 54: 1ZU5gFhARkn0[ElkX;OF4gkIc0Vhgn\ PASSED
+Round 55: XAmOWfa9a_9L46H\Ag3F^n_QnEIfC5^ PASSED
+Round 56: F\KmR<7Ck@`0F8\Xo_n]^]>\2XRF]AA PASSED
+Round 57: m\1Oh8bdIRd_ZPGY@EFn2UZ5==KjN\n PASSED
+Round 58: I0jA8\5Q?iAiJXSZniX0NB5[OPVm=TH PASSED
+Round 59: TBg]om>>fO7@8Zj6TR62e<^D\DBihZO PASSED
+Round 60: mG:lDH::hAK0lE6Ph<R]H@15TCnMnNj PASSED
+Round 61: e4g9L1CDB^D>4J^lWAYoQZ46n3SlQMg PASSED
+Round 62: Q^Om_bB1QV@U1nQX?:Wad\gb_J^@gUV PASSED
+Round 63: C5E2gW4H>Dm?BNgRXNCM::?iTn9KS_c PASSED
+Round 64: d8i\`m4nA2=TP469RIV]SeV7c`RGOE> PASSED
+Round 65: M70=54;F6HjWL0`oIF\l;B3o2UFRjTf PASSED
+Round 66: [fU`ja7191XV2HUK^AHiSKhV1>8kbnC PASSED
+Round 67: di>^ZE_cGGII_ndM?<GcX?IYNQT@Oh^ PASSED
+Round 68: am1KBa>Y8X2hVgEf3\Y[l2DJSiZ2aIE PASSED
+Round 69: FFmX7;B@cD8J;M@?:ij6k?PN8:PiSeK PASSED
+Round 70: ;HRCSdSG8[aD81SBjMHe\hCd3c]VX8P PASSED
+Round 71: P264fYKnD<BM=e_7C8lo0?d32QZZZ:M PASSED
+Round 72: <T>2=Y0ReCo28^9Kf5KgD?jF`T0J^NU PASSED
+Round 73: 2cl?MmaB@`EHONdET?<hN7?>[?YJ]>D PASSED
+Round 74: 1AoN>`aNQ6f0TZE8iR1GY@VDO?^=M3l PASSED
+Round 75: DkmR\^0=df=HQRQJ4Rb]bH2AW`N4cKR PASSED
+Round 76: FOY2=Y?1PLJ1okK3M=a?UcP<So@GJcN PASSED
+Round 77: B8cPa2QAOkBNf^QCkBRQ53]Y2n0LaN< PASSED
+Round 78: VoSH25YQ0logZP:Uc]6h`dQbbQ>S0JV PASSED
+Round 79: J:nL?Xm?Tl6>LAc?nj8^^YPP;^3;8Ya PASSED
+Round 80: c`n2HkBlgH:DYmSWg[EUEe5PS8[\bL> PASSED
+Round 81: <=XT8jP0BZDlXgSOSi5h^:HBC3n5O<Z PASSED
+Round 82: IB@R<aROKfK3]nS@gX8VbPh5Sf:32e_ PASSED
+Round 83: 7onD`Pc<F>?3<bD4JLZ=mRBPHMSJBBf PASSED
+Round 84: Bd]2DP>Z^N^k@2o[NYhK;:lSWOmibdC PASSED
+Round 85: X06mQEW?cE:3G9^fbVAma=PH]NBOBUS PASSED
+Round 86: UYg6nOFadPe<ZS2L:CJkQjC>HU]Z:@U PASSED
+Round 87: iLfhk<Y`]NlG2nc<A=7b8J0P0];:m`j PASSED
+Round 88: <a_8mHhZgd1ibe532<f:Vf[VTfaQV[H PASSED
+Round 89: L7jJPb4GV6@HkELmQB878c^\YO>?:V1 PASSED
+Round 90: ^l1>^5UE;e]6:94[K<bToP@XoNg:5ha PASSED
+Round 91: db1SgVh3KU9U_=@:I2^HSo0RMg\R`ME PASSED
+Round 92: ?F77lo:GUClDQ<Nj?=Cb<CDY;1<kNQO PASSED
+Round 93: hWedVo<B8OcEn^T;1FGDZ0O[<J:^jh PASSED
+Round 94: Q]J7\VCn_bb4`PXkQnBeXCEDO_N=YFc PASSED
+Round 95: 3>B_dU]SGOW8o?3P=FFfY[:8JXF4n9> PASSED
+Round 96: GP`<5M_MmGUlVXMdncZWNd`hL6lJ?;K PASSED
+Round 97: [;caXR>UicRPKoDJbn1@ba8>g5X7@3^ PASSED
+Round 98: >Q\f3jLm]nM9maS__ToQF7_=<GDLJ2H PASSED
+Round 99: S4NWojT\h1eebHTQmS2C[aPg8eDRg\: PASSED
+done.
+
+### Module remove test #2
+
+[    4.014610] kshram: cleaned up.
+[    4.036615] ACPI: PM: Preparing to enter system sleep state S5
+[    4.037433] reboot: Power down

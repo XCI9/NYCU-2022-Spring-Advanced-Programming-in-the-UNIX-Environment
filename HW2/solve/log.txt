@@ -1,0 +1,244 @@
+❯ ./sdb ./hello
+** program './hello' loaded. entry point 0x401000
+          401000: f3 0f 1e fa                                 endbr64
+          401004: 55                                          push      rbp
+          401005: 48 89 e5                                    mov       rbp, rsp
+          401008: ba 0e 00 00 00                              mov       edx, 0xe
+          40100d: 48 8d 05 ec 0f 00 00                        lea       rax, [rip + 0xfec]
+(sdb) break 0x401004
+** set a breakpoint at 0x401004.
+(sdb) break 0x401005
+** set a breakpoint at 0x401005.
+(sdb) cont
+** hit a breakpoint at 0x401004
+          401004: 55                                          push      rbp
+          401005: 48 89 e5                                    mov       rbp, rsp
+          401008: ba 0e 00 00 00                              mov       edx, 0xe
+          40100d: 48 8d 05 ec 0f 00 00                        lea       rax, [rip + 0xfec]
+          401014: 48 89 c6                                    mov       rsi, rax
+(sdb)
+** hit a breakpoint at 0x401005
+          401005: 48 89 e5                                    mov       rbp, rsp
+          401008: ba 0e 00 00 00                              mov       edx, 0xe
+          40100d: 48 8d 05 ec 0f 00 00                        lea       rax, [rip + 0xfec]
+          401014: 48 89 c6                                    mov       rsi, rax
+          401017: bf 01 00 00 00                              mov       edi, 1
+(sdb)
+hello world!
+** the target program terminated
+❯ ./sdb ./hello
+** program './hello' loaded. entry point 0x401000
+          401000: f3 0f 1e fa                                 endbr64
+          401004: 55                                          push      rbp
+          401005: 48 89 e5                                    mov       rbp, rsp
+          401008: ba 0e 00 00 00                              mov       edx, 0xe
+          40100d: 48 8d 05 ec 0f 00 00                        lea       rax, [rip + 0xfec]
+(sdb) break 0x401005
+** set a breakpoint at 0x401005.
+(sdb) break 0x401004
+** set a breakpoint at 0x401004.
+(sdb) cont
+** hit a breakpoint at 0x401004
+          401004: 55                                          push      rbp
+          401005: 48 89 e5                                    mov       rbp, rsp
+          401008: ba 0e 00 00 00                              mov       edx, 0xe
+          40100d: 48 8d 05 ec 0f 00 00                        lea       rax, [rip + 0xfec]
+          401014: 48 89 c6                                    mov       rsi, rax
+(sdb)
+** hit a breakpoint at 0x401005
+          401005: 48 89 e5                                    mov       rbp, rsp
+          401008: ba 0e 00 00 00                              mov       edx, 0xe
+          40100d: 48 8d 05 ec 0f 00 00                        lea       rax, [rip + 0xfec]
+          401014: 48 89 c6                                    mov       rsi, rax
+          401017: bf 01 00 00 00                              mov       edi, 1
+(sdb)
+hello world!
+** the target program terminated
+❯ ./sdb ./hello
+** program './hello' loaded. entry point 0x401000
+          401000: f3 0f 1e fa                                 endbr64
+          401004: 55                                          push      rbp
+          401005: 48 89 e5                                    mov       rbp, rsp
+          401008: ba 0e 00 00 00                              mov       edx, 0xe
+          40100d: 48 8d 05 ec 0f 00 00                        lea       rax, [rip + 0xfec]
+(sdb) break 0x401004
+** set a breakpoint at 0x401004.
+(sdb) break 0x401005
+** set a breakpoint at 0x401005.
+(sdb) si
+** hit a breakpoint at 0x401004
+          401004: 55                                          push      rbp
+          401005: 48 89 e5                                    mov       rbp, rsp
+          401008: ba 0e 00 00 00                              mov       edx, 0xe
+          40100d: 48 8d 05 ec 0f 00 00                        lea       rax, [rip + 0xfec]
+          401014: 48 89 c6                                    mov       rsi, rax
+(sdb) cont
+** hit a breakpoint at 0x401005
+          401005: 48 89 e5                                    mov       rbp, rsp
+          401008: ba 0e 00 00 00                              mov       edx, 0xe
+          40100d: 48 8d 05 ec 0f 00 00                        lea       rax, [rip + 0xfec]
+          401014: 48 89 c6                                    mov       rsi, rax
+          401017: bf 01 00 00 00                              mov       edi, 1
+(sdb) si
+          401008: ba 0e 00 00 00                              mov       edx, 0xe
+          40100d: 48 8d 05 ec 0f 00 00                        lea       rax, [rip + 0xfec]
+          401014: 48 89 c6                                    mov       rsi, rax
+          401017: bf 01 00 00 00                              mov       edi, 1
+          40101c: e8 0a 00 00 00                              call      0x40102b
+(sdb) cont
+hello world!
+** the target program terminated
+❯ ./sdb ./loop1
+** program './loop1' loaded. entry point 0x401000
+          401000: f3 0f 1e fa                                 endbr64
+          401004: 55                                          push      rbp
+          401005: 48 89 e5                                    mov       rbp, rsp
+          401008: 48 83 ec 10                                 sub       rsp, 0x10
+          40100c: c7 45 fc 00 00 00 00                        mov       dword ptr [rbp - 4], 0
+(sdb) break 0x401024
+** set a breakpoint at 0x401024.
+(sdb) cont
+** hit a breakpoint at 0x401024
+          401024: eb 08                                       jmp       0x40102e
+          401026: 83 45 fc 01                                 add       dword ptr [rbp - 4], 1
+          40102a: 83 45 fc 01                                 add       dword ptr [rbp - 4], 1
+          40102e: 83 7d fc 02                                 cmp       dword ptr [rbp - 4], 2
+          401032: 7e f2                                       jle       0x401026
+(sdb) si
+          40102e: 83 7d fc 02                                 cmp       dword ptr [rbp - 4], 2
+          401032: 7e f2                                       jle       0x401026
+          401034: 0f b6 45 f9                                 movzx     eax, byte ptr [rbp - 7]
+          401038: 89 c2                                       mov       edx, eax
+          40103a: 8b 45 fc                                    mov       eax, dword ptr [rbp - 4]
+(sdb) break 0x40102e
+** set a breakpoint at 0x40102e.
+(sdb) cont
+** hit a breakpoint at 0x40102e
+          40102e: 83 7d fc 02                                 cmp       dword ptr [rbp - 4], 2
+          401032: 7e f2                                       jle       0x401026
+          401034: 0f b6 45 f9                                 movzx     eax, byte ptr [rbp - 7]
+          401038: 89 c2                                       mov       edx, eax
+          40103a: 8b 45 fc                                    mov       eax, dword ptr [rbp - 4]
+(sdb) si
+          401032: 7e f2                                       jle       0x401026
+          401034: 0f b6 45 f9                                 movzx     eax, byte ptr [rbp - 7]
+          401038: 89 c2                                       mov       edx, eax
+          40103a: 8b 45 fc                                    mov       eax, dword ptr [rbp - 4]
+          40103d: 01 d0                                       add       eax, edx
+(sdb)
+          401026: 83 45 fc 01                                 add       dword ptr [rbp - 4], 1
+          40102a: 83 45 fc 01                                 add       dword ptr [rbp - 4], 1
+          40102e: 83 7d fc 02                                 cmp       dword ptr [rbp - 4], 2
+          401032: 7e f2                                       jle       0x401026
+          401034: 0f b6 45 f9                                 movzx     eax, byte ptr [rbp - 7]
+(sdb)
+          40102a: 83 45 fc 01                                 add       dword ptr [rbp - 4], 1
+          40102e: 83 7d fc 02                                 cmp       dword ptr [rbp - 4], 2
+          401032: 7e f2                                       jle       0x401026
+          401034: 0f b6 45 f9                                 movzx     eax, byte ptr [rbp - 7]
+          401038: 89 c2                                       mov       edx, eax
+(sdb)
+** hit a breakpoint at 0x40102e
+          40102e: 83 7d fc 02                                 cmp       dword ptr [rbp - 4], 2
+          401032: 7e f2                                       jle       0x401026
+          401034: 0f b6 45 f9                                 movzx     eax, byte ptr [rbp - 7]
+          401038: 89 c2                                       mov       edx, eax
+          40103a: 8b 45 fc                                    mov       eax, dword ptr [rbp - 4]
+(sdb) cont
+4
+** the target program terminated
+❯ ./sdb ./deep
+** program './deep' loaded. entry point 0x401131
+          401131: f3 0f 1e fa                                 endbr64
+          401135: 55                                          push      rbp
+          401136: 48 89 e5                                    mov       rbp, rsp
+          401139: 48 83 ec 10                                 sub       rsp, 0x10
+          40113d: b8 00 00 00 00                              mov       eax, 0
+(sdb) break 0x401034
+** set a breakpoint at 0x401034.
+(sdb) cont
+** hit a breakpoint at 0x401034
+          401034: bf 01 00 00 00                              mov       edi, 1
+          401039: e8 20 01 00 00                              call      0x40115e
+          40103e: 90                                          nop
+          40103f: c9                                          leave
+          401040: c3                                          ret
+(sdb) anchor
+** dropped an anchor
+(sdb) break 0x40114a
+** set a breakpoint at 0x40114a.
+(sdb) cont
+this is callee
+** hit a breakpoint at 0x40114a
+          40114a: b8 00 00 00 00                              mov       eax, 0
+          40114f: e8 5d ff ff ff                              call      0x4010b1
+          401154: 8b 45 fc                                    mov       eax, dword ptr [rbp - 4]
+          401157: 89 c7                                       mov       edi, eax
+          401159: e8 10 00 00 00                              call      0x40116e
+(sdb) tt
+** go back to the anchor point
+          401034: bf 01 00 00 00                              mov       edi, 1
+          401039: e8 20 01 00 00                              call      0x40115e
+          40103e: 90                                          nop
+          40103f: c9                                          leave
+          401040: c3                                          ret
+(sdb) cont
+this is callee
+** hit a breakpoint at 0x40114a
+          40114a: b8 00 00 00 00                              mov       eax, 0
+          40114f: e8 5d ff ff ff                              call      0x4010b1
+          401154: 8b 45 fc                                    mov       eax, dword ptr [rbp - 4]
+          401157: 89 c7                                       mov       edi, eax
+          401159: e8 10 00 00 00                              call      0x40116e
+(sdb)
+hello world
+hello unix
+** the target program terminated
+❯ ./sdb ./deep
+** program './deep' loaded. entry point 0x401131
+          401131: f3 0f 1e fa                                 endbr64
+          401135: 55                                          push      rbp
+          401136: 48 89 e5                                    mov       rbp, rsp
+          401139: 48 83 ec 10                                 sub       rsp, 0x10
+          40113d: b8 00 00 00 00                              mov       eax, 0
+(sdb) break 0x4010de
+** set a breakpoint at 0x4010de.
+(sdb) cont
+this is callee
+** hit a breakpoint at 0x4010de
+          4010de: e8 7b 00 00 00                              call      0x40115e
+          4010e3: c7 45 fc 00 00 00 00                        mov       dword ptr [rbp - 4], 0
+          4010ea: eb 21                                       jmp       0x40110d
+          4010ec: 8b 45 fc                                    mov       eax, dword ptr [rbp - 4]
+          4010ef: 8d 48 06                                    lea       ecx, [rax + 6]
+(sdb) anchor
+** dropped an anchor
+(sdb) break 0x401159
+** set a breakpoint at 0x401159.
+(sdb) cont
+hello world
+hello unix
+** hit a breakpoint at 0x401159
+          401159: e8 10 00 00 00                              call      0x40116e
+          40115e: b8 01 00 00 00                              mov       eax, 1
+          401163: 0f 05                                       syscall
+          401165: c3                                          ret
+          401166: b8 00 00 00 00                              mov       eax, 0
+(sdb) tt
+** go back to the anchor point
+          4010de: e8 7b 00 00 00                              call      0x40115e
+          4010e3: c7 45 fc 00 00 00 00                        mov       dword ptr [rbp - 4], 0
+          4010ea: eb 21                                       jmp       0x40110d
+          4010ec: 8b 45 fc                                    mov       eax, dword ptr [rbp - 4]
+          4010ef: 8d 48 06                                    lea       ecx, [rax + 6]
+(sdb) cont
+hello world
+hello unix
+** hit a breakpoint at 0x401159
+          401159: e8 10 00 00 00                              call      0x40116e
+          40115e: b8 01 00 00 00                              mov       eax, 1
+          401163: 0f 05                                       syscall
+          401165: c3                                          ret
+          401166: b8 00 00 00 00                              mov       eax, 0
+(sdb)
+** the target program terminated
